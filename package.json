@@ -1,0 +1,42 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "vite",
+    "start": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/canvas-confetti": "^1.4.3",
+    "animal-avatar-generator": "^1.1.0",
+    "canvas-confetti": "^1.6.0",
+    "h3": "^0.8.6",
+    "listhen": "^0.3.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
+    "sirv": "^2.0.2",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3",
+    "unique-names-generator": "^4.7.1",
+    "ws": "^8.11.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@types/ws": "^8.5.3",
+    "@vitejs/plugin-react": "^2.2.0",
+    "compression": "^1.7.4",
+    "express": "^4.18.2",
+    "serve-static": "^1.15.0",
+    "tsx": "^3.12.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3",
+    "vite-plugin-windicss": "^1.8.8",
+    "windicss": "^3.5.6"
+  }
+}
