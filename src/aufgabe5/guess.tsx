@@ -1,18 +1,10 @@
-export default function Guess() {
-  let myNumber = 0;
+import Name from "./name";
 
-  function guessANumber() {
-    alert(myNumber + " is your guess");
-  }
-
+export default function Guess(props) {
   return (
     <div>
+      <Name name={props.name} />
       <p>Guess a number between 1 and 100</p>
-      <input
-        type="number"
-        onChange={(event) => (myNumber = event.target.value)}
-      />
-      <button onClick={guessANumber}>Guess</button>
     </div>
   );
 }

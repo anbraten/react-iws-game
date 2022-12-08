@@ -1,27 +1,29 @@
+import Scoreboard from "./scoreboard";
 import Guess from "./guess";
 import Result from "./result";
 
 export default function Game() {
-  const gameState: { mode: "waiting" | "guessing" | "result" } = {
-    mode: "result",
+  const gameState = {
+    mode: "waiting",
+    name: "frog",
+    opponent: "crocodile",
+    result: "",
+    scoreboard: [
+      { name: "frog", score: 2 },
+      { name: "crocodile", score: 3 },
+    ],
   };
-
-  const basket = ["apple", "orange", "pear"];
 
   return (
     <div>
       {gameState.mode === "waiting" ? (
-        <p>Wir suchen noch eine Mitspieler!</p>
+        <p>Wir suchen noch einen Mitspieler!</p>
       ) : gameState.mode === "result" ? (
         <Result />
       ) : (
         <Guess />
       )}
-      <div>
-        {basket.map((entry) => (
-          <li>{entry}</li>
-        ))}
-      </div>
+      <Scoreboard />
     </div>
   );
 }

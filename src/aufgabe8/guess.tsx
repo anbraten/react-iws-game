@@ -9,7 +9,7 @@ export default function Guess(props) {
       <p>Guess a number between 1 and 100</p>
       <input
         type="number"
-        onChange={(event) => (myNumber = event.target.value)}
+        onChange={(event) => (myNumber = parseInt(event.target.value))}
       />
       <button onClick={() => props.guessANumber(myNumber)}>Guess</button>
     </div>

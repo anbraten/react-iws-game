@@ -1,10 +1,8 @@
-import Guess from "./guess";
-import Result from "./result";
-import Scoreboard from "./scoreboard";
+import scoreboard from "../scoreboard";
 
 export default function Game() {
   const gameState = {
-    mode: "guessing",
+    mode: "waiting",
     name: "frog",
     opponent: "crocodile",
     result: "",
@@ -18,12 +16,16 @@ export default function Game() {
     <div>
       {gameState.mode === "waiting" ? (
         <p>Wir suchen noch einen Mitspieler!</p>
-      ) : gameState.mode === "result" ? (
-        <Result />
       ) : (
-        <Guess name={gameState.name} />
+        <p>Du kannst jetzt raten!</p>
       )}
-      <Scoreboard scoreboard={gameState.scoreboard} />
+      <ol>
+        {gameState.scoreboard.map((entry, i) => (
+          <li key={i}>
+            {entry.name}: {entry.score}
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }

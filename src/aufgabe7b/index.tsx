@@ -1,13 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import Guess from "./guess";
 import Result from "./result";
-
-export const gameStateCtx = createContext({});
+import Scoreboard from "./scoreboard";
 
 export default function Game() {
   const [gameState, setGameState] = useState({
     mode: "guessing",
-    name: "Max",
+    name: "frog",
+    opponent: "crocodile",
+    result: "",
+    scoreboard: [
+      { name: "frog", score: 2 },
+      { name: "crocodile", score: 3 },
+    ],
   });
 
   function guessANumber(myNumber) {
@@ -15,14 +20,15 @@ export default function Game() {
   }
 
   return (
-    <gameStateCtx.Provider value={gameState}>
+    <div>
       {gameState.mode === "waiting" ? (
-        <p>Wir suchen noch eine Mitspieler!</p>
+        <p>Wir suchen noch einen Mitspieler!</p>
       ) : gameState.mode === "result" ? (
         <Result />
       ) : (
         <Guess guessANumber={guessANumber} />
       )}
-    </gameStateCtx.Provider>
+      <Scoreboard scoreboard={gameState.scoreboard} />
+    </div>
   );
 }

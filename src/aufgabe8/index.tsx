@@ -1,16 +1,20 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Guess from "./guess";
 import Result from "./result";
 import { io } from "socket.io-client";
-
-export const gameStateCtx = createContext({});
+import Scoreboard from "./scoreboard";
 
 export default function Game() {
   let socket;
   const [gameState, setGameState] = useState({
     mode: "guessing",
-    name: "Max",
-    result: "Du hast gewonnen!",
+    name: "frog",
+    opponent: "crocodile",
+    result: "",
+    scoreboard: [
+      { name: "frog", score: 2 },
+      { name: "crocodile", score: 3 },
+    ],
   });
 
   useEffect(() => {
@@ -25,14 +29,15 @@ export default function Game() {
   }
 
   return (
-    <gameStateCtx.Provider value={gameState}>
+    <div>
       {gameState.mode === "waiting" ? (
-        <p>Wir suchen noch eine Mitspieler!</p>
+        <p>Wir suchen noch einen Mitspieler!</p>
       ) : gameState.mode === "result" ? (
-        <Result />
+        <Result result={gameState.result} />
       ) : (
-        <Guess guessANumber={guessANumber} />
+        <Guess gameState={gameState} guessANumber={guessANumber} />
       )}
-    </gameStateCtx.Provider>
+      <Scoreboard scoreboard={gameState.scoreboard} />
+    </div>
   );
 }

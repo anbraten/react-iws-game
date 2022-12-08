@@ -1,7 +1,7 @@
-export default function Name({ name }) {
+export default function Name(props) {
   return (
     <div>
-      <p>Hello {name}</p>
+      <p>Hello {props.name}</p>
     </div>
   );
 }

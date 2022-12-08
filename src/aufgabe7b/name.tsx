@@ -1,13 +1,7 @@
-import { useContext } from "react";
-
-import { gameStateCtx } from "./index";
-
-export default function Name() {
-  const gameState = useContext(gameStateCtx);
-
+export default function Name(props) {
   return (
     <div>
-      <p>Hello {gameState.name}</p>
+      <p>Hello {props.name}</p>
     </div>
   );
 }

@@ -1,10 +1,17 @@
+import Scoreboard from "./scoreboard";
 import Guess from "./guess";
 import Result from "./result";
 
 export default function Game() {
   const gameState = {
-    mode: "guessing",
-    name: "Max",
+    mode: "result",
+    name: "frog",
+    opponent: "crocodile",
+    result: "",
+    scoreboard: [
+      { name: "frog", score: 2 },
+      { name: "crocodile", score: 3 },
+    ],
   };
 
   function guessANumber(myNumber) {
@@ -14,12 +21,13 @@ export default function Game() {
   return (
     <div>
       {gameState.mode === "waiting" ? (
-        <p>Wir suchen noch eine Mitspieler!</p>
+        <p>Wir suchen noch einen Mitspieler!</p>
       ) : gameState.mode === "result" ? (
         <Result />
       ) : (
         <Guess name={gameState.name} guessANumber={guessANumber} />
       )}
+      <Scoreboard scoreboard={gameState.scoreboard} />
     </div>
   );
 }
