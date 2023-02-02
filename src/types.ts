@@ -20,3 +20,10 @@ export type GameState = {
   result: number | null;
   scoreboard: ScoreboardPlayer[];
 };
+
+export type Lobby = {
+  player1?: Player & Guess;
+  player2?: Player & Guess;
+  result: number;
+  created: Date;
+};

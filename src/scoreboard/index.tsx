@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Lobby, ScoreboardPlayer } from "../types";
 import { io } from "socket.io-client";
-import "./index.css";
 
 export default function () {
   const [scoreboard, setScoreboard] = useState<ScoreboardPlayer[]>([]);

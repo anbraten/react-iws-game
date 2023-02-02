@@ -3,8 +3,6 @@ import { io, Socket } from "socket.io-client";
 import { GameState } from "../types";
 import confetti from "canvas-confetti";
 
-import "./index.css";
-
 let socket: Socket;
 
 export default function Game() {
