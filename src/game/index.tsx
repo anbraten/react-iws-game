@@ -26,9 +26,11 @@ export default function Game() {
       }
 
       const _youWon =
-        _gameState?.result && _gameState.me.guess && _gameState.opponent?.guess
-          ? Math.abs(_gameState.result - _gameState.me.guess) <
-            Math.abs(_gameState.result - _gameState.opponent.guess)
+        _gameState?.magicNumber &&
+        _gameState.me.guess &&
+        _gameState.other?.guess
+          ? Math.abs(_gameState.magicNumber - _gameState.me.guess) <
+            Math.abs(_gameState.magicNumber - _gameState.other.guess)
           : null;
 
       setYouWon(_youWon);
@@ -61,11 +63,11 @@ export default function Game() {
 
         {!gameState?.result && gameState?.opponent && (
           <div className="flex items-center mb-6 gap-2">
-            <img src={gameState.opponent.avatar} className="w-12 h-12" />
-            {gameState.opponent.guess ? (
-              <span>{gameState.opponent.name} already guess. Hurry up!</span>
+            <img src={gameState.other.avatar} className="w-12 h-12" />
+            {gameState.other.guess ? (
+              <span>{gameState.other.name} already guess. Hurry up!</span>
             ) : (
-              <span>{gameState.opponent.name} is still guessing ...</span>
+              <span>{gameState.other.name} is still guessing ...</span>
             )}
           </div>
         )}
@@ -74,7 +76,7 @@ export default function Game() {
           <div className="flex flex-col">
             <span>The number was: {gameState.result}</span>
             <span>
-              {gameState.opponent.name} guess was: {gameState.opponent.guess}
+              {gameState.other.name} guess was: {gameState.other.guess}
             </span>
             <span>Your guess was: {gameState.me.guess}</span>
             <div className="text-xl">

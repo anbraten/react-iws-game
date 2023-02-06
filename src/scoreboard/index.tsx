@@ -49,21 +49,38 @@ export default function () {
           >
             <div className="flex items-center gap-2 w-64">
               {lobby.player1 ? (
-                <>
-                  <img src={lobby.player1.avatar} className="w-12 h-12" />
-                  <span>{lobby.player1.name}</span>
-                </>
+                <div className="flex flex-col">
+                  <div className="flex items-center">
+                    <img src={lobby.player1.avatar} className="w-12 h-12" />
+                    <span>{lobby.player1.name}</span>
+                  </div>
+                  {lobby.player1.guess && (
+                    <span>Guess: {lobby.player1.guess}</span>
+                  )}
+                </div>
               ) : (
                 <span className="ml-4">...</span>
               )}
             </div>
-            <span className="font-bold">vs.</span>
+            <div className="flex flex-col justify-center items-center">
+              <span className="font-bold">vs.</span>
+              {lobby.player1?.guess && lobby.player2?.guess && (
+                <span>Result: {lobby.result}</span>
+              )}
+            </div>
             <div className="flex items-center justify-end gap-2 w-64">
               {lobby.player2 ? (
-                <>
-                  <span>{lobby.player2.name}</span>
-                  <img src={lobby.player2.avatar} className="w-12 h-12" />
-                </>
+                <div className="flex flex-col">
+                  <div className="flex items-center">
+                    <span>{lobby.player2.name}</span>
+                    <img src={lobby.player2.avatar} className="w-12 h-12" />
+                  </div>
+                  {lobby.player2.guess && (
+                    <span className="ml-auto">
+                      Guess: {lobby.player2.guess}
+                    </span>
+                  )}
+                </div>
               ) : (
                 <span className="mr-4">...</span>
               )}

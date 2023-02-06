@@ -89,6 +89,56 @@ class Lobby {
     this.created = new Date();
   }
 
+  getMode() {
+    if (!this.player1 || !this.player2) {
+      return "waiting";
+    }
+
+    if (this.player1.guess && this.player2.guess) {
+      return "result";
+    }
+
+    return "guess";
+  }
+
+  getState(name: string) {
+    if (!this.player1 || !this.player2) {
+      return "Waiting for opponent ...";
+    }
+
+    const me = this.getPlayer(name);
+    const opponent = this.getOpponent(name);
+
+    if (!me.guess) {
+      return "Waiting for you to guess ...";
+    }
+
+    if (!opponent.guess) {
+      return "Waiting for opponent to guess ...";
+    }
+
+    const meDiff = Math.abs(me.guess - this.result);
+    const opponentDiff = Math.abs(opponent.guess - this.result);
+
+    if (meDiff === opponentDiff) {
+      return "Draw!";
+    }
+
+    if (meDiff === 0) {
+      return "Hooray, you guessed correctly!";
+    }
+
+    if (opponentDiff === 0) {
+      return `${opponent.name} guessed correctly!`;
+    }
+
+    if (meDiff < opponentDiff) {
+      return `You were closest!`;
+    } else {
+      return `${opponent.name} was closest!`;
+    }
+  }
+
   getPlayer(name: string) {
     return this.player1?.name === name ? this.player1 : this.player2;
   }
@@ -101,23 +151,29 @@ class Lobby {
     const me = this.getPlayer(name);
 
     const gameState: GameState = {
-      result: this.player1?.guess && this.player2?.guess ? this.result : null,
+      mode: this.getMode(),
+      state: this.getState(name),
+      result: this.getState(name),
+      magicNumber: this.getMode() === "result" ? this.result : undefined,
       me: {
-        name: name,
+        name,
         avatar: me!.avatar,
         guess: this.getPlayer(name)?.guess ?? null,
       },
+      name,
+      other: undefined,
       opponent: undefined,
       scoreboard: players.getScoreboard(),
     };
 
     const opponent = this.getOpponent(name);
     if (opponent) {
-      gameState.opponent = {
+      gameState.other = {
         name: opponent.name,
         avatar: opponent.avatar,
         guess: opponent.guess,
       };
+      gameState.opponent = opponent.name;
     }
 
     return gameState;
@@ -321,6 +377,7 @@ const io = new Server(httpServer, {
     origin: "*",
     methods: ["GET", "POST"],
   },
+  pingTimeout: 1000 * 5, // 5 seconds
 });
 io.on("connection", (ws) => {
   const name = generateName();

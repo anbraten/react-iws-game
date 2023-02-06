@@ -15,10 +15,15 @@ export type Guess = {
 };
 
 export type GameState = {
-  opponent?: Player & Guess;
-  me: Player & Guess;
-  result: number | null;
+  mode: "guess" | "waiting" | "result";
+  name: string;
+  opponent?: string;
+  state: string;
+  result?: string;
+  magicNumber?: number;
   scoreboard: ScoreboardPlayer[];
+  other?: Player & Guess;
+  me: Player & Guess;
 };
 
 export type Lobby = {

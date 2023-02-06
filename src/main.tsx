@@ -8,6 +8,7 @@ import Hello from "./hello";
 import Game from "./game";
 import Aufgabe2 from "./aufgabe2";
 import Scoreboard from "./scoreboard";
+import MarenLive from "./maren-live";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <Route path="/aufgabe2" element={<Aufgabe2 />} />
       <Route path="/game" element={<Game />} />
       <Route path="/scoreboard" element={<Scoreboard />} />
+      <Route path="/maren-live" element={<MarenLive />} />
     </Routes>
   </BrowserRouter>
 );
