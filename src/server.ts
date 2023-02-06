@@ -89,9 +89,14 @@ class Lobby {
     this.created = new Date();
   }
 
-  getMode() {
+  getMode(name: string) {
     if (!this.player1 || !this.player2) {
       return "waiting";
+    }
+
+    const me = this.getPlayer(name);
+    if (me.guess) {
+      return "result";
     }
 
     if (this.player1.guess && this.player2.guess) {
@@ -151,10 +156,11 @@ class Lobby {
     const me = this.getPlayer(name);
 
     const gameState: GameState = {
-      mode: this.getMode(),
+      mode: this.getMode(name),
       state: this.getState(name),
       result: this.getState(name),
-      magicNumber: this.getMode() === "result" ? this.result : undefined,
+      magicNumber:
+        this.player1?.guess && this.player2.guess ? this.result : undefined,
       me: {
         name,
         avatar: me!.avatar,

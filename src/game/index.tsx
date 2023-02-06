@@ -61,7 +61,7 @@ export default function Game() {
           <span className="mb-6">Searching for some skilled opponent ...</span>
         )}
 
-        {!gameState?.result && gameState?.opponent && (
+        {!gameState?.magicNumber && gameState?.opponent && (
           <div className="flex items-center mb-6 gap-2">
             <img src={gameState.other.avatar} className="w-12 h-12" />
             {gameState.other.guess ? (
@@ -72,9 +72,9 @@ export default function Game() {
           </div>
         )}
 
-        {gameState?.result && gameState.opponent && (
+        {gameState?.magicNumber && gameState.opponent && (
           <div className="flex flex-col">
-            <span>The number was: {gameState.result}</span>
+            <span>The number was: {gameState.magicNumber}</span>
             <span>
               {gameState.other.name} guess was: {gameState.other.guess}
             </span>
